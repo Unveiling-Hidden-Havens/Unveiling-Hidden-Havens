@@ -5,18 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Breteau Index Result</title>
     <style>
-        /* Global Styles */
         body {
             font-family: 'Arial', sans-serif;
+            background-color: #FFFAE3; /* Friendly warm background */
+            color: #333;
             margin: 0;
             padding: 0;
-            background-color: #FFFBF0; /* Soft off-white background */
-            color: #333;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            overflow: hidden;
             animation: fadeIn 1s ease-in-out;
         }
 
@@ -35,31 +33,22 @@
         h1 {
             font-size: 36px;
             color: #FF6347;
-            margin-bottom: 15px;
-            animation: slideFromLeft 2s ease-out;
+            margin-bottom: 20px;
+            animation: slideFromLeft 1s ease-out;
         }
 
         h2 {
             font-size: 24px;
             color: #FF4500;
             margin-bottom: 20px;
-            animation: slideFromLeft 2s ease-out 0.5s;
-        }
-
-        .result-container {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            animation: fadeIn 2s ease-in-out 1s;
+            animation: slideFromLeft 1s ease-out 0.5s;
         }
 
         .result {
             font-size: 48px;
             font-weight: bold;
             color: #FF6347;
-            margin-top: 20px;
-            transition: transform 0.5s;
+            margin-top: 30px;
             animation: bounceIn 1.5s ease-out;
         }
 
@@ -82,12 +71,8 @@
 
         /* Keyframe Animations */
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         @keyframes slideUp {
@@ -127,57 +112,13 @@
             }
         }
 
-        /* Floating background animation */
-        .background-animation {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            animation: moveBackground 10s ease-in-out infinite;
-        }
-
-        @keyframes moveBackground {
-            0% {
-                transform: translate(-50%, -50%) scale(1);
-            }
-            50% {
-                transform: translate(-50%, -50%) scale(1.05);
-            }
-            100% {
-                transform: translate(-50%, -50%) scale(1);
-            }
-        }
-
-        /* Responsiveness */
-        @media (max-width: 768px) {
-            .container {
-                width: 90%;
-                padding: 20px;
-            }
-
-            h1 {
-                font-size: 28px;
-            }
-
-            h2 {
-                font-size: 20px;
-            }
-        }
     </style>
 </head>
 <body>
-    <div class="background-animation">
-        <img src="mosquito-image.png" alt="Dengue Mosquito" width="150" />
-    </div>
-    
     <div class="container">
         <h1>Breteau Index Calculation Result</h1>
         <h2>Impact of Aedes Mosquito Breeding Grounds</h2>
-
-        <div class="result-container">
-            <div class="result" id="index-value">Loading...</div>
-        </div>
-
+        <div class="result" id="index-value">Loading...</div>
         <a href="index.html" class="back-link">Go Back to Input Page</a>
     </div>
 
@@ -185,15 +126,12 @@
         // Retrieve the Breteau Index from localStorage
         const index = localStorage.getItem('breteauIndex');
 
-        // If the value is available, display it. Otherwise, show an error message.
+        // Display the result or error message
         if (index) {
-            document.getElementById('index-value').textContent = `${index}`;
+            document.getElementById('index-value').textContent = `Breteau Index: ${index}`;
         } else {
             document.getElementById('index-value').textContent = 'No data available. Please go back and calculate the index first.';
         }
-
-        // Animation for floating mosquito
-        document.querySelector('.background-animation').style.animation = 'moveBackground 10s ease-in-out infinite';
     </script>
 </body>
 </html>
