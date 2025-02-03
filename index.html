@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Breteau Index Result</title>
+    <title>Unveiling Hidden Havens</title>
 
     <!-- External Font and Icon Libraries -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
+    
     <!-- CSS Styling -->
     <style>
         /* Global Reset to Standardize Styling Across Browsers */
@@ -23,7 +23,7 @@
         /* Body Styling */
         body {
             font-family: 'Roboto', sans-serif;
-            background-color: #f9f9f9; /* Light Background Color */
+            background-color: #f0f0f5; /* Light Gray Background */
             color: #333;
             min-height: 100vh;
             display: flex;
@@ -55,7 +55,7 @@
             font-size: 3.5em;
             color: #2C3E50;
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             animation: slideInLeft 1s ease-out;
         }
 
@@ -67,29 +67,78 @@
             animation: fadeIn 2s ease-in-out;
         }
 
-        /* Result Message Section */
-        .result-message {
-            font-size: 1.5em;
-            font-weight: bold;
+        /* Input Section Styling */
+        .input-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
             margin-bottom: 30px;
-            color: #27ae60;
-            text-align: center;
-            animation: fadeIn 2s ease-in-out;
         }
 
-        .result-warning {
-            font-size: 1.6em;
+        .input-label {
+            font-size: 18px;
             font-weight: bold;
-            color: #E74C3C;
-            margin-bottom: 40px;
-            animation: fadeIn 3s ease-in-out;
+            color: #2C3E50;
+            margin-bottom: 15px;
         }
 
-        /* Button Section */
-        .button-section {
-            margin-top: 30px;
+        input {
+            width: 80%;
+            padding: 12px;
+            margin: 10px 0;
+            font-size: 16px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            outline: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+
+        /* Input Focus Effect */
+        input:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.6);
+        }
+
+        /* Tooltip Styles */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 180px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px;
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            margin-left: -90px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* Button Styling */
         button {
             padding: 15px 50px;
             background-color: #E74C3C;
@@ -176,12 +225,9 @@
                 font-size: 1.8em;
             }
 
-            .result-message {
-                font-size: 1.3em;
-            }
-
-            .result-warning {
-                font-size: 1.4em;
+            input {
+                width: 90%;
+                padding: 10px;
             }
 
             button {
@@ -224,22 +270,33 @@
 
 <body>
 
-    <!-- Main Result Container -->
+    <!-- Main Form Container -->
     <div class="container">
-        <h1>Breteau Index Result</h1>
+        <h1>Unveiling Hidden Havens</h1>
+        <h2>Breteau Index Calculator</h2>
 
-        <!-- Display Result Message Based on Breteau Index -->
-        <div class="result-message">
-            <p>Your Breteau Index: <span id="result"></span></p>
-        </div>
+        <!-- Houses Inspected Section -->
+        <section class="input-section">
+            <label for="houses-inspected" class="input-label">Houses Inspected:</label>
+            <input type="number" id="houses-inspected" placeholder="Enter number of houses inspected" required>
+            <span class="tooltip">?
+                <span class="tooltiptext">Number of houses surveyed to check for mosquito breeding grounds.</span>
+            </span>
+        </section>
 
-        <!-- Warning or Caution Based on Index -->
-        <div class="result-warning" id="warning-message"></div>
+        <!-- Positive Containers Section -->
+        <section class="input-section">
+            <label for="positive-containers" class="input-label">Positive Breeding Sites:</label>
+            <input type="number" id="positive-containers" placeholder="Enter number of positive breeding sites" required>
+            <span class="tooltip">?
+                <span class="tooltiptext">Count of locations with mosquito larvae.</span>
+            </span>
+        </section>
 
-        <!-- Button to Recalculate -->
-        <div class="button-section">
-            <button onclick="goBack()">Recalculate</button>
-        </div>
+        <!-- Button Section -->
+        <section class="button-section">
+            <button onclick="calculateIndex()">Calculate Index</button>
+        </section>
 
         <!-- Footer Section -->
         <footer>
@@ -247,33 +304,30 @@
         </footer>
     </div>
 
-    <!-- JavaScript Code to Handle Result Calculation -->
+    <!-- JavaScript Code for Calculations -->
     <script>
-        // Retrieve the Breteau Index from LocalStorage
-        let index = parseFloat(localStorage.getItem('breteauIndex')) || 0;
-        document.getElementById('result').innerText = index.toFixed(2);
+        function calculateIndex() {
+            let positive = parseFloat(document.getElementById('positive-containers').value);
+            let houses = parseFloat(document.getElementById('houses-inspected').value);
 
-        // Display Warning or Caution Based on the Index Value
-        let warningText = "";
-        if (index > 50) {
-            warningText = "EVACUATE TEMPORARILY AND ONLY MOVE IN AFTER ACTIONS BY YOUR LOCAL AUTHORITY AND ORGANIZATIONS. FOLLOW ALL HEALTH ADVICE.";
-        } else if (index > 20) {
-            warningText = "CAUTION - CONSIDERABLE DANGER. PLEASE TAKE NECESSARY ACTIONS AND INFORM LOCAL AUTHORITIES IMMEDIATELY.";
-        } else {
-            warningText = "Safe Zone - No Immediate Danger.";
-        }
+            // Validate Inputs
+            if (isNaN(positive) || isNaN(houses) || positive < 0 || houses <= 0) {
+                alert("Please enter valid numbers.");
+                return;
+            }
 
-        // Display the Warning Message on the Page
-        document.getElementById('warning-message').innerText = warningText;
+            // Calculate Breteau Index
+            let index = (positive / houses) * 100;
 
-        // Function to Go Back and Recalculate
-        function goBack() {
-            window.location.href = 'index.html';
+            // Store Result in LocalStorage and Redirect
+            localStorage.setItem('breteauIndex', index.toFixed(2));
+            window.location.href = 'result.html';
         }
     </script>
 
 </body>
 </html>
+
 
 
 
