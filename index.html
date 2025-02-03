@@ -18,27 +18,32 @@
         <h1>Unveiling Hidden Havens</h1>
         <h2>Breteau Index Calculator</h2>
         
+        <!-- Moved the label "Houses Inspected" before the input -->
         <label for="houses-inspected">Houses Inspected:</label>
         <input type="number" id="houses-inspected" required>
         
+        <!-- Positive Containers input -->
         <label for="positive-containers">Positive Containers:</label>
         <input type="number" id="positive-containers" required>
+
+        <!-- Link to result page moved after inputs -->
+        <footer>
+            <a href="result.html" id="result-link">Go to Result Page</a>
+        </footer>
         
+        <!-- Map and video section -->
         <h3>Map of Nallur Area, Jaffna</h3>
         <img src="image.png" alt="Map of Nallur Area, Jaffna">
         
         <h3>Dengue Prevention Video</h3>
         <iframe width="560" height="315" src="https://www.youtube.com/embed/Fixp7OAYFfA" frameborder="0" allowfullscreen></iframe>
-
-        <footer>
-            <a href="result.html" id="result-link">Go to Result Page</a>
-        </footer>
     </div>
     
     <script>
         // Initially hide the link until a valid calculation is made
         document.getElementById('result-link').style.display = 'none';
         
+        // Add event listeners to the inputs
         document.getElementById('positive-containers').addEventListener('input', calculateIndex);
         document.getElementById('houses-inspected').addEventListener('input', calculateIndex);
         
