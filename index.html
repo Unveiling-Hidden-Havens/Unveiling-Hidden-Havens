@@ -3,16 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unveiling Hidden Havens</title>
+    <title>Breteau Index Result</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            background-color: #FFFAE3; /* Friendly warm background color */
-            color: #333; /* Dark text for good readability */
+            background-color: #FFFAE3; /* Same warm background as index */
+            color: #333;
             margin: 0;
             padding: 0;
+            transition: all 0.5s ease;
         }
+        
         .container {
             max-width: 600px;
             margin: auto;
@@ -20,116 +22,97 @@
             background-color: white;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1.5s ease-out;
         }
-        input {
-            padding: 10px;
-            margin: 10px;
-            font-size: 16px;
-            width: 80%;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        input[type="number"] {
-            -moz-appearance: textfield; /* Remove arrows in Firefox */
-        }
-        input[type=number]::-webkit-outer-spin-button,
-        input[type=number]::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
+
         h1 {
-            color: #FF6347; /* Warm red tone for the title */
+            color: #FF6347; /* Same warm red tone */
+            font-size: 36px;
         }
+
         h2 {
             color: #FF4500; /* Darker warm tone */
+            font-size: 24px;
+            margin-top: 10px;
         }
+
+        .result {
+            font-size: 48px;
+            font-weight: bold;
+            color: #FF6347;
+            margin-top: 30px;
+            animation: bounceIn 1s ease-out;
+        }
+
         footer {
-            margin-top: 20px;
+            margin-top: 30px;
             padding: 10px;
-            background-color: #FFFAE3; /* Same as background color */
+            background-color: #FFFAE3;
         }
+
         footer a {
             text-decoration: none;
             font-weight: bold;
-            color: #FF6347; /* Matching color with title */
-        }
-        img, iframe {
-            width: 100%;
-            max-width: 600px;
-            margin-top: 20px;
-            border-radius: 8px;
-        }
-        .input-section {
-            margin-top: 30px;
-        }
-        .input-label {
+            color: #FF6347;
             font-size: 18px;
-            color: #333;
+            transition: color 0.3s ease-in-out;
         }
-        .input-area {
-            font-size: 16px;
-            color: #555;
+
+        footer a:hover {
+            color: #FF4500;
         }
-        .button-section {
-            margin-top: 40px;
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
         }
-        .footer-links {
-            font-size: 16px;
-            color: #555;
+
+        @keyframes bounceIn {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Unveiling Hidden Havens</h1>
-        <h2>Breteau Index Calculator</h2>
-        
-        <div class="input-section">
-            <!-- First section: Houses Inspected -->
-            <label for="houses-inspected" class="input-label">Houses Inspected:</label>
-            <input type="number" id="houses-inspected" class="input-area" inputmode="numeric" required>
-        </div>
+        <h1>Breteau Index Calculation Result</h1>
+        <h2>Impact of Aedes Mosquito Breeding Grounds</h2>
 
-        <div class="input-section">
-            <!-- Second section: Positive Containers -->
-            <label for="positive-containers" class="input-label">Positive Containers:</label>
-            <input type="number" id="positive-containers" class="input-area" inputmode="numeric" required>
-        </div>
+        <!-- Display the calculated Breteau Index -->
+        <div class="result" id="index-value">Loading...</div>
 
-        <!-- Link Section -->
+        <!-- Return Link -->
         <footer>
-            <a href="result.html" id="result-link">Go to Result Page</a>
+            <a href="index.html">Go Back to Input Page</a>
         </footer>
-
-        <!-- Map and Video Section -->
-        <h3>Map of Nallur Area, Jaffna</h3>
-        <img src="image.png" alt="Map of Nallur Area, Jaffna">
-        
-        <h3>Dengue Prevention Video</h3>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/Fixp7OAYFfA" frameborder="0" allowfullscreen></iframe>
     </div>
 
     <script>
-        // Initially hide the result link until valid data is entered
-        document.getElementById('result-link').style.display = 'none';
+        // Retrieve the Breteau Index value from localStorage
+        const index = localStorage.getItem('breteauIndex');
 
-        // Add event listeners to inputs to calculate index
-        document.getElementById('positive-containers').addEventListener('input', calculateIndex);
-        document.getElementById('houses-inspected').addEventListener('input', calculateIndex);
-
-        function calculateIndex() {
-            let positive = parseFloat(document.getElementById('positive-containers').value);
-            let houses = parseFloat(document.getElementById('houses-inspected').value);
-
-            // Ensure values are valid before showing result link
-            if (!isNaN(positive) && !isNaN(houses) && positive >= 0 && houses > 0) {
-                let index = (positive / houses) * 100;
-                localStorage.setItem('breteauIndex', index.toFixed(2)); // Save the index to localStorage
-                document.getElementById('result-link').style.display = 'block'; // Show the result link when valid
-            } else {
-                document.getElementById('result-link').style.display = 'none'; // Hide result link if invalid data
-            }
+        // Display the result or a message if no result is found
+        if (index) {
+            document.getElementById('index-value').textContent = `Breteau Index: ${index}`;
+        } else {
+            document.getElementById('index-value').textContent = 'No data available. Please calculate the index on the input page first.';
         }
     </script>
 </body>
 </html>
+
