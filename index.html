@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Unveiling Hidden Havens</title>
+    <title>Breteau Index Calculator</title>
 
     <!-- External Font and Icon Libraries -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    
-    <!-- CSS Styling -->
+
+    <!-- Enhanced CSS Styling -->
     <style>
-        /* Global Reset to Standardize Styling Across Browsers */
+        /* Global Reset */
         * {
             margin: 0;
             padding: 0;
@@ -23,7 +23,7 @@
         /* Body Styling */
         body {
             font-family: 'Roboto', sans-serif;
-            background-color: #f0f0f5; /* Light Gray Background */
+            background-color: #f5f5f5; /* Light Gray Background */
             color: #333;
             min-height: 100vh;
             display: flex;
@@ -31,26 +31,23 @@
             align-items: center;
             position: relative;
             overflow: hidden;
-            transition: all 0.5s ease;
+            padding: 0 20px;
         }
 
-        /* Main Container */
+        /* Main Container Styling */
         .container {
-            max-width: 1100px;
             width: 100%;
+            max-width: 1100px;
             padding: 40px;
+            background: linear-gradient(to bottom right, #e3f2fd, #ffffff);
             border-radius: 15px;
-            background: linear-gradient(to bottom right, #fff, #e3f2fd);
-            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
             z-index: 2;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
             animation: fadeInUp 1.5s ease-out;
+            position: relative;
         }
 
-        /* Header Styles */
+        /* Header Styling */
         h1 {
             font-size: 3.5em;
             color: #2C3E50;
@@ -60,82 +57,36 @@
         }
 
         h2 {
-            font-size: 2.2em;
+            font-size: 2.5em;
             color: #E74C3C;
             text-align: center;
             margin-bottom: 40px;
             animation: fadeIn 2s ease-in-out;
         }
 
-        /* Input Section Styling */
-        .input-section {
+        /* Input Field Styling */
+        .input-container {
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 100%;
             margin-bottom: 30px;
         }
 
-        .input-label {
-            font-size: 18px;
-            font-weight: bold;
-            color: #2C3E50;
-            margin-bottom: 15px;
-        }
-
         input {
+            padding: 12px 20px;
+            font-size: 1.2em;
             width: 80%;
-            padding: 12px;
-            margin: 10px 0;
-            font-size: 16px;
             border-radius: 8px;
-            border: 1px solid #ccc;
-            outline: none;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            border: 2px solid #ddd;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
         }
 
-        input[type="number"]::-webkit-outer-spin-button,
-        input[type="number"]::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-
-        input[type="number"] {
-            -moz-appearance: textfield;
-        }
-
-        /* Input Focus Effect */
         input:focus {
+            outline: none;
             border-color: #3498db;
-            box-shadow: 0 0 5px rgba(52, 152, 219, 0.6);
-        }
-
-        /* Tooltip Styles */
-        .tooltip {
-            position: relative;
-            display: inline-block;
-            cursor: pointer;
-        }
-
-        .tooltip .tooltiptext {
-            visibility: hidden;
-            width: 180px;
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            border-radius: 6px;
-            padding: 8px;
-            position: absolute;
-            bottom: 100%;
-            left: 50%;
-            margin-left: -90px;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .tooltip:hover .tooltiptext {
-            visibility: visible;
-            opacity: 1;
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
         }
 
         /* Button Styling */
@@ -227,7 +178,7 @@
 
             input {
                 width: 90%;
-                padding: 10px;
+                font-size: 1.1em;
             }
 
             button {
@@ -270,65 +221,47 @@
 
 <body>
 
-    <!-- Main Form Container -->
+    <!-- Main Container -->
     <div class="container">
-        <h1>Unveiling Hidden Havens</h1>
-        <h2>Breteau Index Calculator</h2>
+        <h1>Breteau Index Calculator</h1>
 
-        <!-- Houses Inspected Section -->
-        <section class="input-section">
-            <label for="houses-inspected" class="input-label">Houses Inspected:</label>
+        <!-- Instruction and Inputs -->
+        <h2>Calculate the Breteau Index for Dengue Prevention</h2>
+
+        <div class="input-container">
+            <label for="houses-inspected">Houses Inspected:</label>
             <input type="number" id="houses-inspected" placeholder="Enter number of houses inspected" required>
-            <span class="tooltip">?
-                <span class="tooltiptext">Number of houses surveyed to check for mosquito breeding grounds.</span>
-            </span>
-        </section>
 
-        <!-- Positive Containers Section -->
-        <section class="input-section">
-            <label for="positive-containers" class="input-label">Positive Breeding Sites:</label>
-            <input type="number" id="positive-containers" placeholder="Enter number of positive breeding sites" required>
-            <span class="tooltip">?
-                <span class="tooltiptext">Count of locations with mosquito larvae.</span>
-            </span>
-        </section>
+            <label for="positive-containers">Positive Containers:</label>
+            <input type="number" id="positive-containers" placeholder="Enter number of positive containers" required>
+        </div>
 
-        <!-- Button Section -->
-        <section class="button-section">
-            <button onclick="calculateIndex()">Calculate Index</button>
-        </section>
+        <!-- Calculate Button -->
+        <button onclick="calculateIndex()">Calculate Breteau Index</button>
 
-        <!-- Footer Section -->
+        <!-- Footer -->
         <footer>
             <p>&copy; 2025 Unveiling Hidden Havens. All rights reserved.</p>
         </footer>
     </div>
 
-    <!-- JavaScript Code for Calculations -->
+    <!-- JavaScript for Dynamic Calculation -->
     <script>
         function calculateIndex() {
-            let positive = parseFloat(document.getElementById('positive-containers').value);
-            let houses = parseFloat(document.getElementById('houses-inspected').value);
-
-            // Validate Inputs
-            if (isNaN(positive) || isNaN(houses) || positive < 0 || houses <= 0) {
-                alert("Please enter valid numbers.");
-                return;
+            let positive = document.getElementById('positive-containers').value;
+            let houses = document.getElementById('houses-inspected').value;
+            if (positive && houses) {
+                let index = (positive / houses) * 100;
+                localStorage.setItem('breteauIndex', index.toFixed(2));
+                window.location.href = 'result.html';
+            } else {
+                alert('Please enter valid numbers.');
             }
-
-            // Calculate Breteau Index
-            let index = (positive / houses) * 100;
-
-            // Store Result in LocalStorage and Redirect
-            localStorage.setItem('breteauIndex', index.toFixed(2));
-            window.location.href = 'result.html';
         }
     </script>
 
 </body>
 </html>
-
-
 
 
 
