@@ -9,6 +9,8 @@
         .container { max-width: 600px; margin: auto; padding: 20px; }
         input, button { padding: 10px; margin: 10px; }
         img, iframe { width: 100%; max-width: 600px; margin-top: 20px; }
+        footer { margin-top: 50px; padding: 10px; background-color: #f8f8f8; }
+        footer a { text-decoration: none; font-weight: bold; color: #007bff; }
     </style>
 </head>
 <body>
@@ -28,16 +30,21 @@
         <iframe width="560" height="315" src="https://www.youtube.com/embed/Fixp7OAYFfA" frameborder="0" allowfullscreen></iframe>
     </div>
     
+    <footer>
+        <a href="result.html" id="result-link">Go to Result Page</a>
+    </footer>
+
     <script>
         function calculateIndex() {
-            let positive = document.getElementById('positive-containers').value;
-            let houses = document.getElementById('houses-inspected').value;
-            if (positive && houses) {
+            let positive = parseFloat(document.getElementById('positive-containers').value);
+            let houses = parseFloat(document.getElementById('houses-inspected').value);
+            
+            if (!isNaN(positive) && !isNaN(houses) && positive >= 0 && houses > 0) {
                 let index = (positive / houses) * 100;
-                localStorage.setItem('breteauIndex', index.toFixed(2));
-                window.location.href = 'result.html';
+                localStorage.setItem('breteauIndex', index.toFixed(2));  // Save the index in localStorage
+                document.getElementById('result-link').style.display = 'block'; // Show the link after calculation
             } else {
-                alert('Please enter valid numbers');
+                alert('Please enter valid numbers (positive containers and houses inspected).');
             }
         }
     </script>
