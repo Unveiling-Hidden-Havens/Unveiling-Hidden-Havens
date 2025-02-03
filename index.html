@@ -7,9 +7,9 @@
     <style>
         body { font-family: Arial, sans-serif; text-align: center; }
         .container { max-width: 600px; margin: auto; padding: 20px; }
-        input, button { padding: 10px; margin: 10px; }
+        input { padding: 10px; margin: 10px; }
         img, iframe { width: 100%; max-width: 600px; margin-top: 20px; }
-        footer { margin-top: 50px; padding: 10px; background-color: #f8f8f8; }
+        footer { margin-top: 20px; padding: 10px; background-color: #f8f8f8; }
         footer a { text-decoration: none; font-weight: bold; color: #007bff; }
     </style>
 </head>
@@ -17,34 +17,42 @@
     <div class="container">
         <h1>Unveiling Hidden Havens</h1>
         <h2>Breteau Index Calculator</h2>
-        <label for="positive-containers">Positive Containers:</label>
-        <input type="number" id="positive-containers" required>
+        
         <label for="houses-inspected">Houses Inspected:</label>
         <input type="number" id="houses-inspected" required>
-        <button onclick="calculateIndex()">Go</button>
+        
+        <label for="positive-containers">Positive Containers:</label>
+        <input type="number" id="positive-containers" required>
         
         <h3>Map of Nallur Area, Jaffna</h3>
         <img src="image.png" alt="Map of Nallur Area, Jaffna">
         
         <h3>Dengue Prevention Video</h3>
         <iframe width="560" height="315" src="https://www.youtube.com/embed/Fixp7OAYFfA" frameborder="0" allowfullscreen></iframe>
+
+        <footer>
+            <a href="result.html" id="result-link">Go to Result Page</a>
+        </footer>
     </div>
     
-    <footer>
-        <a href="result.html" id="result-link">Go to Result Page</a>
-    </footer>
-
     <script>
+        // Initially hide the link until a valid calculation is made
+        document.getElementById('result-link').style.display = 'none';
+        
+        document.getElementById('positive-containers').addEventListener('input', calculateIndex);
+        document.getElementById('houses-inspected').addEventListener('input', calculateIndex);
+        
         function calculateIndex() {
             let positive = parseFloat(document.getElementById('positive-containers').value);
             let houses = parseFloat(document.getElementById('houses-inspected').value);
             
+            // Validate inputs
             if (!isNaN(positive) && !isNaN(houses) && positive >= 0 && houses > 0) {
                 let index = (positive / houses) * 100;
                 localStorage.setItem('breteauIndex', index.toFixed(2));  // Save the index in localStorage
                 document.getElementById('result-link').style.display = 'block'; // Show the link after calculation
             } else {
-                alert('Please enter valid numbers (positive containers and houses inspected).');
+                document.getElementById('result-link').style.display = 'none'; // Hide the link if inputs are invalid
             }
         }
     </script>
