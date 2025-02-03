@@ -6,82 +6,94 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Unveiling Hidden Havens</title>
 
-    <!-- External Fonts and Icon Libraries -->
+    <!-- External Font and Icon Libraries -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
+    
+    <!-- CSS Styling -->
     <style>
-        /* Reset All Styles to ensure consistency across browsers */
+        /* Global Reset to Standardize Styling Across Browsers */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            transition: all 0.3s ease;
         }
 
         /* Body Styling */
         body {
             font-family: 'Roboto', sans-serif;
-            background-color: #f4f4f9;
+            background-color: #f0f0f5; /* Light Gray Background */
             color: #333;
-            margin: 0;
-            padding: 0;
-            position: relative;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
+            position: relative;
             overflow: hidden;
+            transition: all 0.5s ease;
         }
 
-        /* Container for the form */
+        /* Main Container */
         .container {
-            max-width: 1000px;
+            max-width: 1100px;
             width: 100%;
-            background: linear-gradient(to bottom right, #ffffff, #e0e0e0);
-            border-radius: 15px;
             padding: 40px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            position: relative;
+            border-radius: 15px;
+            background: linear-gradient(to bottom right, #fff, #e3f2fd);
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
             z-index: 2;
             display: flex;
             flex-direction: column;
+            justify-content: center;
             align-items: center;
+            animation: fadeInUp 1.5s ease-out;
         }
 
-        /* Heading Styles */
+        /* Header Styles */
         h1 {
+            font-size: 3.5em;
             color: #2C3E50;
-            font-size: 3em;
-            margin-bottom: 20px;
             text-align: center;
+            margin-bottom: 25px;
+            animation: slideInLeft 1s ease-out;
         }
 
         h2 {
-            font-size: 2em;
+            font-size: 2.2em;
             color: #E74C3C;
-            margin-bottom: 30px;
             text-align: center;
+            margin-bottom: 40px;
+            animation: fadeIn 2s ease-in-out;
         }
 
         /* Input Section Styling */
         .input-section {
-            margin-top: 20px;
-            margin-bottom: 30px;
-            width: 100%;
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 30px;
         }
 
         .input-label {
             font-size: 18px;
             font-weight: bold;
             color: #2C3E50;
-            display: block;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
 
-        /* Remove arrows in number input */
+        input {
+            width: 80%;
+            padding: 12px;
+            margin: 10px 0;
+            font-size: 16px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            outline: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
         input[type="number"]::-webkit-outer-spin-button,
         input[type="number"]::-webkit-inner-spin-button {
             -webkit-appearance: none;
@@ -89,25 +101,16 @@
         }
 
         input[type="number"] {
-            -moz-appearance: textfield; /* Firefox */
+            -moz-appearance: textfield;
         }
 
-        input {
-            width: 80%;
-            padding: 12px;
-            margin: 10px auto;
-            font-size: 16px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-            transition: all 0.3s ease-in-out;
+        /* Input Focus Effect */
+        input:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.6);
         }
 
-        input[type="number"]:focus {
-            outline: none;
-            border-color: #007BFF;
-            box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
-        }
-
+        /* Tooltip Styles */
         .tooltip {
             position: relative;
             display: inline-block;
@@ -123,8 +126,7 @@
             border-radius: 6px;
             padding: 8px;
             position: absolute;
-            z-index: 1;
-            bottom: 120%;
+            bottom: 100%;
             left: 50%;
             margin-left: -90px;
             opacity: 0;
@@ -136,29 +138,105 @@
             opacity: 1;
         }
 
-        .button-section {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
-
+        /* Button Styling */
         button {
-            padding: 15px 40px;
+            padding: 15px 50px;
             background-color: #E74C3C;
             color: white;
             border: none;
             border-radius: 10px;
-            font-size: 16px;
+            font-size: 18px;
             cursor: pointer;
             transition: all 0.3s ease;
+            animation: buttonSlideIn 1s ease-out;
         }
 
         button:hover {
             background-color: #C0392B;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            transform: translateY(-3px);
         }
 
-        /* Advanced Background Animation */
+        /* Footer Styling */
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 14px;
+            color: #777;
+            padding: 20px;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            transition: all 0.5s ease;
+        }
+
+        /* Keyframes for Animations */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes buttonSlideIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px;
+            }
+
+            h1 {
+                font-size: 2.5em;
+            }
+
+            h2 {
+                font-size: 1.8em;
+            }
+
+            input {
+                width: 90%;
+                padding: 10px;
+            }
+
+            button {
+                padding: 12px 35px;
+                font-size: 16px;
+            }
+        }
+
+        /* Background Animation (mosquito image) */
         body::before {
             content: "";
             position: absolute;
@@ -166,110 +244,73 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('mosquito.png'); /* Mosquito Image URL */
-            background-size: contain;
+            background-image: url('mosquito.png'); /* Path to the mosquito image */
+            background-size: 30%;
             background-repeat: no-repeat;
             background-position: center center;
-            opacity: 0.05;
+            opacity: 0.07;
             z-index: 1;
-            animation: fadeInOut 8s infinite;
+            animation: mosquitoAnimation 10s ease infinite;
         }
 
-        @keyframes fadeInOut {
+        @keyframes mosquitoAnimation {
             0% {
                 opacity: 0.05;
             }
             50% {
-                opacity: 0.1;
+                opacity: 0.15;
             }
             100% {
                 opacity: 0.05;
             }
         }
 
-        /* Responsive Styling */
-        @media (max-width: 768px) {
-            .container {
-                padding: 30px;
-            }
-
-            h1 {
-                font-size: 2em;
-            }
-
-            h2 {
-                font-size: 1.5em;
-            }
-
-            input {
-                width: 100%;
-                padding: 10px;
-            }
-
-            button {
-                padding: 12px 30px;
-                font-size: 14px;
-            }
-        }
-
-        /* Footer Styling */
-        footer {
-            margin-top: 50px;
-            font-size: 14px;
-            color: #777;
-            text-align: center;
-            padding: 20px;
-            position: relative;
-            bottom: 0;
-            width: 100%;
-        }
     </style>
 </head>
 
 <body>
 
-    <!-- Main Content Container -->
+    <!-- Main Form Container -->
     <div class="container">
         <h1>Unveiling Hidden Havens</h1>
         <h2>Breteau Index Calculator</h2>
 
-        <!-- House Inspected Input -->
+        <!-- Houses Inspected Section -->
         <section class="input-section">
             <label for="houses-inspected" class="input-label">Houses Inspected:</label>
             <input type="number" id="houses-inspected" placeholder="Enter number of houses inspected" required>
             <span class="tooltip">?
-                <span class="tooltiptext">Total number of houses checked for breeding sites.</span>
+                <span class="tooltiptext">Number of houses surveyed to check for mosquito breeding grounds.</span>
             </span>
         </section>
 
-        <!-- Positive Breeding Sites Input -->
+        <!-- Positive Containers Section -->
         <section class="input-section">
             <label for="positive-containers" class="input-label">Positive Breeding Sites:</label>
             <input type="number" id="positive-containers" placeholder="Enter number of positive breeding sites" required>
             <span class="tooltip">?
-                <span class="tooltiptext">Number of breeding sites where mosquito larvae were found.</span>
+                <span class="tooltiptext">Count of locations with mosquito larvae.</span>
             </span>
         </section>
 
-        <!-- Calculate Button -->
+        <!-- Button Section -->
         <section class="button-section">
             <button onclick="calculateIndex()">Calculate Index</button>
         </section>
 
-        <!-- Footer -->
+        <!-- Footer Section -->
         <footer>
             <p>&copy; 2025 Unveiling Hidden Havens. All rights reserved.</p>
         </footer>
     </div>
 
-    <!-- JavaScript to handle calculations and redirection -->
+    <!-- JavaScript Code for Calculations -->
     <script>
         function calculateIndex() {
-            // Retrieving input values
             let positive = parseFloat(document.getElementById('positive-containers').value);
             let houses = parseFloat(document.getElementById('houses-inspected').value);
 
-            // Validation: Ensure numbers are positive and not empty
+            // Validate Inputs
             if (isNaN(positive) || isNaN(houses) || positive < 0 || houses <= 0) {
                 alert("Please enter valid numbers.");
                 return;
@@ -278,16 +319,14 @@
             // Calculate Breteau Index
             let index = (positive / houses) * 100;
 
-            // Save the index in localStorage
+            // Store Result in LocalStorage and Redirect
             localStorage.setItem('breteauIndex', index.toFixed(2));
-
-            // Redirect to result page
             window.location.href = 'result.html';
         }
     </script>
+
 </body>
 </html>
-
 
 
 
