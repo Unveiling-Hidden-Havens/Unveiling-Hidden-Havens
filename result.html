@@ -5,63 +5,195 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Breteau Index Result</title>
     <style>
+        /* Global Styles */
         body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #FFFAE3; /* Friendly warm background color */
-            color: #333; /* Dark text for good readability */
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
+            background-color: #FFFBF0; /* Soft off-white background */
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            animation: fadeIn 1s ease-in-out;
         }
+
         .container {
-            max-width: 600px;
-            margin: auto;
-            padding: 20px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 800px;
+            padding: 30px;
+            background-color: #FFFFFF;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            animation: slideUp 1.5s ease-out;
+            text-align: center;
+            position: relative;
         }
+
         h1 {
-            color: #FF6347; /* Warm red tone for the title */
+            font-size: 36px;
+            color: #FF6347;
+            margin-bottom: 15px;
+            animation: slideFromLeft 2s ease-out;
         }
-        .result {
+
+        h2 {
             font-size: 24px;
-            margin-top: 20px;
+            color: #FF4500;
+            margin-bottom: 20px;
+            animation: slideFromLeft 2s ease-out 0.5s;
         }
-        footer {
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #FFFAE3; /* Same as background color */
+
+        .result-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 2s ease-in-out 1s;
         }
-        footer a {
+
+        .result {
+            font-size: 48px;
+            font-weight: bold;
+            color: #FF6347;
+            margin-top: 20px;
+            transition: transform 0.5s;
+            animation: bounceIn 1.5s ease-out;
+        }
+
+        .back-link {
             text-decoration: none;
             font-weight: bold;
-            color: #FF6347; /* Matching color with title */
+            color: #FF6347;
+            margin-top: 30px;
+            font-size: 18px;
+            text-transform: uppercase;
+            transition: color 0.3s ease-in-out;
+            position: absolute;
+            bottom: 10px;
+            right: 20px;
+        }
+
+        .back-link:hover {
+            color: #FF4500;
+        }
+
+        /* Keyframe Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideFromLeft {
+            from {
+                transform: translateX(-100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes bounceIn {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Floating background animation */
+        .background-animation {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: moveBackground 10s ease-in-out infinite;
+        }
+
+        @keyframes moveBackground {
+            0% {
+                transform: translate(-50%, -50%) scale(1);
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.05);
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+
+        /* Responsiveness */
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            h2 {
+                font-size: 20px;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="background-animation">
+        <img src="mosquito-image.png" alt="Dengue Mosquito" width="150" />
+    </div>
+    
     <div class="container">
-        <h1>Breteau Index Result</h1>
-        <div class="result">
-            <p>Your calculated Breteau Index is:</p>
-            <h2 id="index-value"></h2>
+        <h1>Breteau Index Calculation Result</h1>
+        <h2>Impact of Aedes Mosquito Breeding Grounds</h2>
+
+        <div class="result-container">
+            <div class="result" id="index-value">Loading...</div>
         </div>
 
-        <footer>
-            <a href="index.html">Back to Calculation Page</a>
-        </footer>
+        <a href="index.html" class="back-link">Go Back to Input Page</a>
     </div>
 
     <script>
-        // Retrieve the Breteau index from localStorage
+        // Retrieve the Breteau Index from localStorage
         const index = localStorage.getItem('breteauIndex');
 
+        // If the value is available, display it. Otherwise, show an error message.
         if (index) {
             document.getElementById('index-value').textContent = `${index}`;
         } else {
             document.getElementById('index-value').textContent = 'No data available. Please go back and calculate the index first.';
         }
+
+        // Animation for floating mosquito
+        document.querySelector('.background-animation').style.animation = 'moveBackground 10s ease-in-out infinite';
     </script>
 </body>
 </html>
