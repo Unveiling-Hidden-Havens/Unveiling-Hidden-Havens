@@ -28,22 +28,17 @@
     </div>
     
     <script>
-        window.onload = function() {
-            // Retrieve the Breteau Index from localStorage
-            let index = parseFloat(localStorage.getItem('breteauIndex')) || 0;
-            document.getElementById('result').innerText = index + '%';  // Display the result
-            
-            // Warning messages based on the index value
-            let warningText = "";
-            if (index > 50) {
-                warningText = "EVACUATE TEMPORARILY AND ONLY MOVE IN AFTER ACTIONS BY YOUR LOCAL AUTHORITY AND ORGANIZATIONS. FOLLOW ALL HEALTH ADVICE.";
-            } else if (index > 20) {
-                warningText = "CAUTION - DANGEROUS DENGUE BREEDING GROUNDS. Contact local authorities immediately.";
-            }
-            document.getElementById('warning').innerText = warningText;
-        };
-
-        // Go back to index.html for new calculations
+        let index = parseFloat(localStorage.getItem('breteauIndex')) || 0;
+        document.getElementById('result').innerText = index;
+        
+        let warningText = "";
+        if (index > 50) {
+            warningText = "EVACUATE TEMPORARILY AND ONLY MOVE IN AFTER ACTIONS BY YOUR LOCAL AUTHORITY AND ORGANIZATIONS. FOLLOW ALL HEALTH ADVICE.";
+        } else if (index > 20) {
+            warningText = "CAUTION - Considerable danger. Please take necessary actions and inform local authorities immediately.";
+        }
+        document.getElementById('warning').innerText = warningText;
+        
         function goBack() {
             window.location.href = 'index.html';
         }
