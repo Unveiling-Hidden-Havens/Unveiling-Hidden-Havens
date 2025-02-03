@@ -6,81 +6,72 @@
     <title>Unveiling Hidden Havens</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             text-align: center;
-            background-color: #FFFAE3; /* Friendly warm background color */
-            color: #333; /* Dark text for readability */
+            background-color: #f7f7f7;
+            color: #333;
             margin: 0;
             padding: 0;
             position: relative;
+            box-sizing: border-box;
         }
         .container {
-            max-width: 600px;
+            max-width: 700px;
             margin: auto;
             padding: 20px;
             background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             position: relative;
-            z-index: 2; /* Ensure the container stays above the background image */
+            z-index: 2;
         }
         input {
-            padding: 10px;
+            padding: 12px;
             margin: 10px;
             font-size: 16px;
             width: 80%;
             border: 1px solid #ccc;
-            border-radius: 5px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
         }
-        input[type="number"] {
-            -moz-appearance: textfield; /* Remove arrows in Firefox */
-        }
-        input[type=number]::-webkit-outer-spin-button,
-        input[type=number]::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
+        input[type="number"]:focus {
+            border-color: #007BFF;
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
         }
         h1 {
-            color: #FF6347; /* Warm red tone for the title */
+            color: #2C3E50;
+            margin-bottom: 10px;
         }
         h2 {
-            color: #FF4500; /* Darker warm tone */
-        }
-        footer {
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #FFFAE3;
-        }
-        footer a {
-            text-decoration: none;
-            font-weight: bold;
-            color: #FF6347;
-        }
-        img, iframe {
-            width: 100%;
-            max-width: 600px;
-            margin-top: 20px;
-            border-radius: 8px;
+            color: #E74C3C;
+            margin-bottom: 20px;
         }
         .input-section {
-            margin-top: 30px;
+            margin-top: 20px;
+            text-align: left;
         }
         .input-label {
             font-size: 18px;
+            font-weight: bold;
             color: #333;
         }
-        .input-area {
-            font-size: 16px;
-            color: #555;
-        }
         .button-section {
-            margin-top: 40px;
+            margin-top: 30px;
         }
-        .footer-links {
-            font-size: 16px;
-            color: #555;
+        .footer {
+            margin-top: 50px;
+            padding: 20px;
+            background-color: #2C3E50;
+            color: white;
+            font-size: 14px;
+            text-align: center;
         }
-        /* Add mosquito background */
+        .footer a {
+            color: #E74C3C;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        /* Adding subtle background mosquito animation */
         body::before {
             content: "";
             position: absolute;
@@ -88,82 +79,107 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('mosquito.png'); /* Replace with the path to your mosquito image */
+            background-image: url('mosquito.png'); /* Replace with your mosquito image */
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center center;
-            opacity: 0.1; /* Make the mosquito transparent */
-            z-index: 1; /* Place it behind the content */
-        }
-        /* Add the message */
-        .message {
-            position: absolute;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 24px;
-            color: #FF6347;
-            font-weight: bold;
+            opacity: 0.1;
             z-index: 1;
+            animation: fadeInOut 8s infinite;
         }
+
+        @keyframes fadeInOut {
+            0% {
+                opacity: 0.1;
+            }
+            50% {
+                opacity: 0.2;
+            }
+            100% {
+                opacity: 0.1;
+            }
+        }
+
+        /* Tooltip styling */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 150px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%; /* Position above the text */
+            left: 50%;
+            margin-left: -75px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+        
     </style>
 </head>
 <body>
-    <div class="message">
-        Be aware of Dengue Mosquitoes!
-    </div>
 
     <div class="container">
         <h1>Unveiling Hidden Havens</h1>
         <h2>Breteau Index Calculator</h2>
-        
+
         <div class="input-section">
-            <!-- First section: Houses Inspected -->
             <label for="houses-inspected" class="input-label">Houses Inspected:</label>
-            <input type="number" id="houses-inspected" class="input-area" inputmode="numeric" required>
+            <input type="number" id="houses-inspected" placeholder="Enter number of houses inspected" required>
+            <span class="tooltip">?
+                <span class="tooltiptext">Total number of houses checked for breeding sites.</span>
+            </span>
         </div>
 
         <div class="input-section">
-            <!-- Second section: Positive Containers -->
-            <label for="positive-containers" class="input-label">Positive Containers:</label>
-            <input type="number" id="positive-containers" class="input-area" inputmode="numeric" required>
+            <label for="positive-containers" class="input-label">Positive Breeding Sites:</label>
+            <input type="number" id="positive-containers" placeholder="Enter number of positive breeding sites" required>
+            <span class="tooltip">?
+                <span class="tooltiptext">Number of breeding sites where mosquito larvae were found.</span>
+            </span>
         </div>
 
-        <!-- Link Section -->
-        <footer>
-            <a href="result.html" id="result-link">Go to Result Page</a>
-        </footer>
+        <div class="button-section">
+            <button onclick="calculateIndex()" style="padding: 10px 20px; font-size: 16px; cursor: pointer; background-color: #E74C3C; color: white; border: none; border-radius: 8px;">
+                Calculate Index
+            </button>
+        </div>
 
-        <!-- Map and Video Section -->
-        <h3>Map of Nallur Area, Jaffna</h3>
-        <img src="image.png" alt="Map of Nallur Area, Jaffna">
-        
-        <h3>Dengue Prevention Video</h3>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/Fixp7OAYFfA" frameborder="0" allowfullscreen></iframe>
+        <footer class="footer">
+            <p>&copy; 2025 Hidden Havens. <a href="result.html">Go to Result Page</a></p>
+        </footer>
     </div>
 
     <script>
-        // Initially hide the result link until valid data is entered
-        document.getElementById('result-link').style.display = 'none';
-
-        // Add event listeners to inputs to calculate index
-        document.getElementById('positive-containers').addEventListener('input', calculateIndex);
-        document.getElementById('houses-inspected').addEventListener('input', calculateIndex);
-
         function calculateIndex() {
             let positive = parseFloat(document.getElementById('positive-containers').value);
             let houses = parseFloat(document.getElementById('houses-inspected').value);
 
-            // Ensure values are valid before showing result link
-            if (!isNaN(positive) && !isNaN(houses) && positive >= 0 && houses > 0) {
-                let index = (positive / houses) * 100;
-                localStorage.setItem('breteauIndex', index.toFixed(2)); // Save the index to localStorage
-                document.getElementById('result-link').style.display = 'block'; // Show the result link when valid
-            } else {
-                document.getElementById('result-link').style.display = 'none'; // Hide result link if invalid data
+            if (isNaN(positive) || isNaN(houses) || positive < 0 || houses <= 0) {
+                alert("Please enter valid numbers.");
+                return;
             }
+
+            let index = (positive / houses) * 100;
+            localStorage.setItem('breteauIndex', index.toFixed(2)); // Save to localStorage
+            window.location.href = 'result.html'; // Redirect to result page
         }
     </script>
+
 </body>
 </html>
 
