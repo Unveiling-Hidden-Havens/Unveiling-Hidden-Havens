@@ -3,114 +3,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Breteau Index Result</title>
+    <title>Unveiling Hidden Havens</title>
     <style>
+        /* Global Styles */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             text-align: center;
-            background-color: #FFFAE3; /* Same warm background as index */
+            background-color: #FFFAE3; /* Friendly warm background */
             color: #333;
             margin: 0;
             padding: 0;
-            transition: all 0.5s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            animation: fadeIn 1s ease-in-out;
         }
-        
+
         .container {
-            max-width: 600px;
-            margin: auto;
-            padding: 20px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            animation: fadeIn 1.5s ease-out;
+            width: 80%;
+            max-width: 800px;
+            padding: 30px;
+            background-color: #FFFFFF;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            animation: slideUp 1.5s ease-out;
+            text-align: center;
         }
 
         h1 {
-            color: #FF6347; /* Same warm red tone */
+            color: #FF6347;
             font-size: 36px;
+            margin-bottom: 15px;
         }
 
         h2 {
-            color: #FF4500; /* Darker warm tone */
+            color: #FF4500;
             font-size: 24px;
-            margin-top: 10px;
+            margin-bottom: 20px;
         }
 
-        .result {
-            font-size: 48px;
-            font-weight: bold;
-            color: #FF6347;
-            margin-top: 30px;
-            animation: bounceIn 1s ease-out;
-        }
-
-        footer {
-            margin-top: 30px;
+        input {
             padding: 10px;
-            background-color: #FFFAE3;
+            margin: 10px;
+            font-size: 16px;
+            width: 80%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
         }
 
-        footer a {
-            text-decoration: none;
+        .button-section {
+            margin-top: 40px;
+        }
+
+        .back-link {
             font-weight: bold;
             color: #FF6347;
             font-size: 18px;
-            transition: color 0.3s ease-in-out;
+            text-decoration: none;
         }
 
-        footer a:hover {
+        .back-link:hover {
             color: #FF4500;
         }
 
-        /* Animations */
+        /* Keyframe Animations */
         @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
             from {
+                transform: translateY(100px);
                 opacity: 0;
             }
             to {
+                transform: translateY(0);
                 opacity: 1;
             }
         }
 
-        @keyframes bounceIn {
-            0% {
-                transform: scale(0);
-                opacity: 0;
+        /* Responsiveness */
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+                padding: 20px;
             }
-            50% {
-                transform: scale(1.1);
-                opacity: 1;
+            h1 {
+                font-size: 28px;
             }
-            100% {
-                transform: scale(1);
-                opacity: 1;
+            h2 {
+                font-size: 20px;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Breteau Index Calculation Result</h1>
-        <h2>Impact of Aedes Mosquito Breeding Grounds</h2>
+        <h1>Unveiling Hidden Havens</h1>
+        <h2>Breteau Index Calculator</h2>
 
-        <!-- Display the calculated Breteau Index -->
-        <div class="result" id="index-value">Loading...</div>
+        <div>
+            <label for="houses-inspected">Houses Inspected:</label>
+            <input type="number" id="houses-inspected" required>
+        </div>
 
-        <!-- Return Link -->
+        <div>
+            <label for="positive-containers">Positive Containers:</label>
+            <input type="number" id="positive-containers" required>
+        </div>
+
+        <div class="button-section">
+            <button id="calculate-btn" onclick="calculateIndex()">Calculate Breteau Index</button>
+        </div>
+
         <footer>
-            <a href="index.html">Go Back to Input Page</a>
+            <a href="result.html" id="result-link" class="back-link" style="display:none;">Go to Result Page</a>
         </footer>
     </div>
 
     <script>
-        // Retrieve the Breteau Index value from localStorage
-        const index = localStorage.getItem('breteauIndex');
+        // Function to calculate the Breteau Index
+        function calculateIndex() {
+            let housesInspected = parseFloat(document.getElementById('houses-inspected').value);
+            let positiveContainers = parseFloat(document.getElementById('positive-containers').value);
+            let resultLink = document.getElementById('result-link');
 
-        // Display the result or a message if no result is found
-        if (index) {
-            document.getElementById('index-value').textContent = `Breteau Index: ${index}`;
-        } else {
-            document.getElementById('index-value').textContent = 'No data available. Please calculate the index on the input page first.';
+            // Validate input
+            if (!isNaN(housesInspected) && !isNaN(positiveContainers) && housesInspected > 0) {
+                let index = (positiveContainers / housesInspected) * 100;
+                localStorage.setItem('breteauIndex', index.toFixed(2)); // Store the result in localStorage
+
+                // Show the result link
+                resultLink.style.display = 'block'; 
+            } else {
+                alert("Please enter valid values.");
+            }
         }
     </script>
 </body>
