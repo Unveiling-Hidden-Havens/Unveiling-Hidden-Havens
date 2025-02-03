@@ -7,52 +7,41 @@
     <style>
         /* Global Styles */
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: Arial, sans-serif;
             text-align: center;
             background-color: #FFFAE3; /* Friendly warm background */
             color: #333;
             margin: 0;
             padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            animation: fadeIn 1s ease-in-out;
         }
 
         .container {
-            width: 80%;
-            max-width: 800px;
+            max-width: 600px;
+            margin: auto;
             padding: 30px;
-            background-color: #FFFFFF;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            animation: slideUp 1.5s ease-out;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
 
         h1 {
-            color: #FF6347;
-            font-size: 36px;
-            margin-bottom: 15px;
+            color: #FF6347; /* Warm red tone */
         }
 
         h2 {
-            color: #FF4500;
-            font-size: 24px;
-            margin-bottom: 20px;
+            color: #FF4500; /* Darker warm tone */
         }
 
-        .result {
+        .result-value {
             font-size: 48px;
             font-weight: bold;
             color: #FF6347;
             margin-top: 30px;
-            animation: bounceIn 1s ease-out;
         }
 
         footer {
-            margin-top: 30px;
+            margin-top: 20px;
             padding: 10px;
             background-color: #FFFAE3; /* Same as background color */
         }
@@ -62,43 +51,10 @@
             font-weight: bold;
             color: #FF6347;
             font-size: 18px;
-            transition: color 0.3s ease-in-out;
         }
 
         footer a:hover {
             color: #FF4500;
-        }
-
-        /* Keyframe Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes slideUp {
-            from {
-                transform: translateY(100px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        @keyframes bounceIn {
-            0% {
-                transform: scale(0);
-                opacity: 0;
-            }
-            50% {
-                transform: scale(1.1);
-                opacity: 1;
-            }
-            100% {
-                transform: scale(1);
-                opacity: 1;
-            }
         }
 
         /* Responsiveness */
@@ -107,26 +63,20 @@
                 width: 90%;
                 padding: 20px;
             }
-            h1 {
-                font-size: 28px;
-            }
-            h2 {
-                font-size: 20px;
-            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Breteau Index Calculation Result</h1>
-        <h2>Impact of Aedes Mosquito Breeding Grounds</h2>
+        <h1>Unveiling Hidden Havens</h1>
+        <h2>Breteau Index Calculation Result</h2>
 
-        <!-- Display the calculated Breteau Index -->
-        <div class="result" id="index-value">Loading...</div>
+        <!-- Display the Breteau Index Result -->
+        <div class="result-value" id="index-result">Loading...</div>
 
-        <!-- Return Link -->
+        <!-- Back Link -->
         <footer>
-            <a href="index.html" class="back-link">Go Back to Input Page</a>
+            <a href="index.html">Go Back to Input Page</a>
         </footer>
     </div>
 
@@ -136,14 +86,13 @@
 
         // Display the result or a message if no result is found
         if (index) {
-            document.getElementById('index-value').textContent = `Breteau Index: ${index}`;
+            document.getElementById('index-result').textContent = `Breteau Index: ${index}`;
         } else {
-            document.getElementById('index-value').textContent = 'No data available. Please calculate the index on the input page first.';
+            document.getElementById('index-result').textContent = 'No data available. Please calculate the index on the input page first.';
         }
     </script>
 </body>
 </html>
-
 
 
 
