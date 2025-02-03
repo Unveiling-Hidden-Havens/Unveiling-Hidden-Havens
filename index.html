@@ -3,135 +3,247 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unveiling Hidden Havens</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Breteau Index Calculator</title>
+
+    <!-- External Font and Icon Libraries -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <!-- Enhanced CSS Styling -->
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #FFFAE3; /* Friendly warm background color */
-            color: #333; /* Dark text for good readability */
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
         }
-        .container {
-            max-width: 600px;
-            margin: auto;
-            padding: 20px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        input {
-            padding: 10px;
-            margin: 10px;
-            font-size: 16px;
-            width: 80%;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        input[type="number"] {
-            -moz-appearance: textfield; /* Remove arrows in Firefox */
-        }
-        input[type=number]::-webkit-outer-spin-button,
-        input[type=number]::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-        h1 {
-            color: #FF6347; /* Warm red tone for the title */
-        }
-        h2 {
-            color: #FF4500; /* Darker warm tone */
-        }
-        footer {
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #FFFAE3; /* Same as background color */
-        }
-        footer a {
-            text-decoration: none;
-            font-weight: bold;
-            color: #FF6347; /* Matching color with title */
-        }
-        img, iframe {
-            width: 100%;
-            max-width: 600px;
-            margin-top: 20px;
-            border-radius: 8px;
-        }
-        .input-section {
-            margin-top: 30px;
-        }
-        .input-label {
-            font-size: 18px;
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f5f5f5; /* Light Gray Background */
             color: #333;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding: 0 20px;
         }
-        .input-area {
-            font-size: 16px;
-            color: #555;
+
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            padding: 40px;
+            background: linear-gradient(to bottom right, #e3f2fd, #ffffff);
+            border-radius: 15px;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+            z-index: 2;
+            animation: fadeInUp 1.5s ease-out;
+            position: relative;
         }
-        .button-section {
-            margin-top: 40px;
+
+        h1 {
+            font-size: 3.5em;
+            color: #2C3E50;
+            text-align: center;
+            margin-bottom: 25px;
+            animation: slideInLeft 1s ease-out;
         }
-        .footer-links {
-            font-size: 16px;
-            color: #555;
+
+        h2 {
+            font-size: 2.5em;
+            color: #E74C3C;
+            text-align: center;
+            margin-bottom: 40px;
+            animation: fadeIn 2s ease-in-out;
         }
+
+        .input-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        input {
+            padding: 12px 20px;
+            font-size: 1.2em;
+            width: 80%;
+            border-radius: 8px;
+            border: 2px solid #ddd;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
+        }
+
+        button {
+            padding: 15px 50px;
+            background-color: #E74C3C;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: buttonSlideIn 1s ease-out;
+        }
+
+        button:hover {
+            background-color: #C0392B;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            transform: translateY(-3px);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 14px;
+            color: #777;
+            padding: 20px;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            transition: all 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes buttonSlideIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px;
+            }
+
+            h1 {
+                font-size: 2.5em;
+            }
+
+            h2 {
+                font-size: 1.8em;
+            }
+
+            input {
+                width: 90%;
+                font-size: 1.1em;
+            }
+
+            button {
+                padding: 12px 35px;
+                font-size: 16px;
+            }
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('mosquito.png'); /* Path to the mosquito image */
+            background-size: 30%;
+            background-repeat: no-repeat;
+            background-position: center center;
+            opacity: 0.07;
+            z-index: 1;
+            animation: mosquitoAnimation 10s ease infinite;
+        }
+
+        @keyframes mosquitoAnimation {
+            0% {
+                opacity: 0.05;
+            }
+            50% {
+                opacity: 0.15;
+            }
+            100% {
+                opacity: 0.05;
+            }
+        }
+
     </style>
 </head>
+
 <body>
+
     <div class="container">
-        <h1>Unveiling Hidden Havens</h1>
-        <h2>Breteau Index Calculator</h2>
-        
-        <div class="input-section">
-            <!-- First section: Houses Inspected -->
-            <label for="houses-inspected" class="input-label">Houses Inspected:</label>
-            <input type="number" id="houses-inspected" class="input-area" inputmode="numeric" required>
+        <h1>Breteau Index Calculator</h1>
+        <h2>Calculate the Breteau Index for Dengue Prevention</h2>
+
+        <div class="input-container">
+            <label for="houses-inspected">Houses Inspected:</label>
+            <input type="number" id="houses-inspected" placeholder="Enter number of houses inspected" required>
+
+            <label for="positive-containers">Positive Containers:</label>
+            <input type="number" id="positive-containers" placeholder="Enter number of positive containers" required>
         </div>
 
-        <div class="input-section">
-            <!-- Second section: Positive Containers -->
-            <label for="positive-containers" class="input-label">Positive Containers:</label>
-            <input type="number" id="positive-containers" class="input-area" inputmode="numeric" required>
-        </div>
+        <button onclick="calculateIndex()">Calculate Breteau Index</button>
 
-        <!-- Link Section -->
         <footer>
-            <a href="result.html" id="result-link">Go to Result Page</a>
+            <p>&copy; 2025 Unveiling Hidden Havens. All rights reserved.</p>
         </footer>
-
-        <!-- Map and Video Section -->
-        <h3>Map of Nallur Area, Jaffna</h3>
-        <img src="image.png" alt="Map of Nallur Area, Jaffna">
-        
-        <h3>Dengue Prevention Video</h3>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/Fixp7OAYFfA" frameborder="0" allowfullscreen></iframe>
     </div>
 
     <script>
-        // Initially hide the result link until valid data is entered
-        document.getElementById('result-link').style.display = 'none';
-
-        // Add event listeners to inputs to calculate index
-        document.getElementById('positive-containers').addEventListener('input', calculateIndex);
-        document.getElementById('houses-inspected').addEventListener('input', calculateIndex);
-
         function calculateIndex() {
-            let positive = parseFloat(document.getElementById('positive-containers').value);
-            let houses = parseFloat(document.getElementById('houses-inspected').value);
-
-            // Ensure values are valid before showing result link
-            if (!isNaN(positive) && !isNaN(houses) && positive >= 0 && houses > 0) {
+            let positive = document.getElementById('positive-containers').value;
+            let houses = document.getElementById('houses-inspected').value;
+            if (positive && houses) {
                 let index = (positive / houses) * 100;
-                localStorage.setItem('breteauIndex', index.toFixed(2)); // Save the index to localStorage
-                document.getElementById('result-link').style.display = 'block'; // Show the result link when valid
+                localStorage.setItem('breteauIndex', index.toFixed(2));
+                window.location.href = 'result.html'; // Only redirect after calculation
             } else {
-                document.getElementById('result-link').style.display = 'none'; // Hide result link if invalid data
+                alert('Please enter valid numbers.');
             }
         }
     </script>
+
 </body>
 </html>
-
 
