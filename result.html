@@ -10,9 +10,9 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
-    <!-- CSS Styling -->
+    <!-- Enhanced CSS Styling -->
     <style>
-        /* Global Reset to Standardize Styling Across Browsers */
+        /* Global Reset */
         * {
             margin: 0;
             padding: 0;
@@ -23,7 +23,7 @@
         /* Body Styling */
         body {
             font-family: 'Roboto', sans-serif;
-            background-color: #f9f9f9; /* Light Background Color */
+            background-color: #f5f5f5; /* Light Gray Background */
             color: #333;
             min-height: 100vh;
             display: flex;
@@ -31,63 +31,81 @@
             align-items: center;
             position: relative;
             overflow: hidden;
-            transition: all 0.5s ease;
+            padding: 0 20px;
         }
 
-        /* Main Container */
+        /* Main Container Styling */
         .container {
-            max-width: 1100px;
             width: 100%;
+            max-width: 1100px;
             padding: 40px;
+            background: linear-gradient(to bottom right, #e3f2fd, #ffffff);
             border-radius: 15px;
-            background: linear-gradient(to bottom right, #fff, #e3f2fd);
-            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
             z-index: 2;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
             animation: fadeInUp 1.5s ease-out;
+            position: relative;
         }
 
-        /* Header Styles */
+        /* Header Styling */
         h1 {
             font-size: 3.5em;
             color: #2C3E50;
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             animation: slideInLeft 1s ease-out;
         }
 
         h2 {
-            font-size: 2.2em;
+            font-size: 2.5em;
             color: #E74C3C;
             text-align: center;
             margin-bottom: 40px;
             animation: fadeIn 2s ease-in-out;
         }
 
-        /* Result Message Section */
-        .result-message {
+        /* Result Display Styling */
+        .result-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 50px;
+        }
+
+        .result-label {
+            font-size: 2.2em;
+            font-weight: bold;
+            color: #2C3E50;
+            margin-bottom: 20px;
+        }
+
+        .result-value {
+            font-size: 3em;
+            color: #3498db;
+            font-weight: bold;
+            animation: slideInUp 1.2s ease-out;
+        }
+
+        /* Warning Box Styling */
+        .warning-box {
+            width: 80%;
+            background-color: #fbc2c4;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
             font-size: 1.5em;
             font-weight: bold;
-            margin-bottom: 30px;
-            color: #27ae60;
-            text-align: center;
+            color: #D32F2F;
             animation: fadeIn 2s ease-in-out;
         }
 
-        .result-warning {
-            font-size: 1.6em;
-            font-weight: bold;
-            color: #E74C3C;
-            margin-bottom: 40px;
-            animation: fadeIn 3s ease-in-out;
-        }
-
-        /* Button Section */
-        .button-section {
-            margin-top: 30px;
+        /* Button Styling */
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
         }
 
         button {
@@ -151,6 +169,17 @@
             }
         }
 
+        @keyframes slideInUp {
+            0% {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
         @keyframes buttonSlideIn {
             0% {
                 opacity: 0;
@@ -176,12 +205,13 @@
                 font-size: 1.8em;
             }
 
-            .result-message {
-                font-size: 1.3em;
+            .result-value {
+                font-size: 2.5em;
             }
 
-            .result-warning {
-                font-size: 1.4em;
+            .warning-box {
+                width: 90%;
+                font-size: 1.2em;
             }
 
             button {
@@ -228,45 +258,56 @@
     <div class="container">
         <h1>Breteau Index Result</h1>
 
-        <!-- Display Result Message Based on Breteau Index -->
-        <div class="result-message">
-            <p>Your Breteau Index: <span id="result"></span></p>
+        <!-- Display the Result -->
+        <div class="result-container">
+            <div class="result-label">Your Breteau Index is:</div>
+            <div id="result-value" class="result-value">--</div>
         </div>
 
-        <!-- Warning or Caution Based on Index -->
-        <div class="result-warning" id="warning-message"></div>
-
-        <!-- Button to Recalculate -->
-        <div class="button-section">
-            <button onclick="goBack()">Recalculate</button>
+        <!-- Warning Message Based on Breteau Index -->
+        <div id="warning-box" class="warning-box">
+            <!-- Warning Text Will Be Displayed Here Based on Index -->
         </div>
 
-        <!-- Footer Section -->
+        <!-- Button Section for Calculating Again -->
+        <div class="button-container">
+            <button onclick="goBack()">Go Back and Calculate Again</button>
+        </div>
+
+        <!-- Footer -->
         <footer>
             <p>&copy; 2025 Unveiling Hidden Havens. All rights reserved.</p>
         </footer>
     </div>
 
-    <!-- JavaScript Code to Handle Result Calculation -->
+    <!-- JavaScript for Dynamic Result Handling -->
     <script>
-        // Retrieve the Breteau Index from LocalStorage
+        // Fetch the Breteau Index from localStorage
         let index = parseFloat(localStorage.getItem('breteauIndex')) || 0;
-        document.getElementById('result').innerText = index.toFixed(2);
 
-        // Display Warning or Caution Based on the Index Value
+        // Display the Index in the Result Section
+        document.getElementById('result-value').innerText = index.toFixed(2);
+
+        // Set the Warning Box Based on the Breteau Index
         let warningText = "";
+        let warningColor = "";
         if (index > 50) {
             warningText = "EVACUATE TEMPORARILY AND ONLY MOVE IN AFTER ACTIONS BY YOUR LOCAL AUTHORITY AND ORGANIZATIONS. FOLLOW ALL HEALTH ADVICE.";
+            warningColor = "#D32F2F";
         } else if (index > 20) {
-            warningText = "CAUTION - CONSIDERABLE DANGER. PLEASE TAKE NECESSARY ACTIONS AND INFORM LOCAL AUTHORITIES IMMEDIATELY.";
+            warningText = "CAUTION - CONSIDERABLE DANGER. Please take necessary actions and inform local authorities immediately.";
+            warningColor = "#F39C12";
         } else {
-            warningText = "Safe Zone - No Immediate Danger.";
+            warningText = "SAFE - Minimal breeding grounds detected. Continue regular surveillance.";
+            warningColor = "#2ECC71";
         }
+        
+        // Set Warning Message and Style
+        let warningBox = document.getElementById('warning-box');
+        warningBox.innerText = warningText;
+        warningBox.style.backgroundColor = warningColor;
 
-        // Display the Warning Message on the Page
-        document.getElementById('warning-message').innerText = warningText;
-
-        // Function to Go Back and Recalculate
+        // Function to go back to the input page
         function goBack() {
             window.location.href = 'index.html';
         }
@@ -274,5 +315,4 @@
 
 </body>
 </html>
-
 
